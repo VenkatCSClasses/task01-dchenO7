@@ -27,7 +27,18 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
         assertFalse( BankAccount.isEmailValid(""));         // empty string
 
-        
+        assertFalse( BankAccount.isEmailValid("ab.com"));   // missing '@' symbol
+        assertFalse( BankAccount.isEmailValid("@ab.com"));  //missing local part
+        assertFalse( BankAccount.isEmailValid("ab@.com"));  // missing domain name
+        assertFalse( BankAccount.isEmailValid("ab#cd@fh.com")); // invalid character
+        assertFalse( BankAccount.isEmailValid("ab-@ch.com")); //missing letter or number after special character
+        assertFalse( BankAccount.isEmailValid("ab@cd.e")); // domain extension too short
+
+        assertTrue( BankAccount.isEmailValid("a@b.com")); 
+        assertTrue( BankAccount.isEmailValid("a-b@c.com")); 
+        assertTrue( BankAccount.isEmailValid("ab@ed.cc"));
+        assertTrue( BankAccount.isEmailValid("a12@gm.com"));
+        assertTrue( BankAccount.isEmailValid("am@mail-archive.com"));
     }
 
     @Test
