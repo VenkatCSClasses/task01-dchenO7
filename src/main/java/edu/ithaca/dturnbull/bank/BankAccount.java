@@ -40,11 +40,53 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
+        if (email == null || email.isEmpty()) {
             return false;
         }
-        else {
-            return true;
+        if (email.indexOf('@') != email.lastIndexOf('@')) {
+            return false; // more than one @
         }
+        String[] parts = email.split("@");
+        if (parts.length != 2) {
+            return false;
+        }
+        String local = parts[0];
+        String domain = parts[1];
+        if (local.isEmpty() || domain.isEmpty()) {
+            return false;
+        }
+        // Check local part: starts with letter or number, can have -, but - not at start/end, and after - must be letter/number
+        if (!Character.isLetterOrDigit(local.charAt(0))) {
+            return false;
+        }
+        for (int i = 0; i < local.length(); i++) {
+            char c = local.charAt(i);
+            if (!Character.isLetterOrDigit(c) && c != '-' && c != '.') {
+                return false;
+            }
+            if (c == '-' && (i == 0 || i == local.length() - 1 || !Character.isLetterOrDigit(local.charAt(i + 1)))) {
+                return false;
+            }
+        }
+        // Domain: must have ., domain name not empty, extension >=2
+        int dotIndex = domain.indexOf('.');
+        if (dotIndex == -1 || dotIndex == 0 || dotIndex == domain.length() - 1) {
+            return false;
+        }
+        String extension = domain.substring(dotIndex + 1);
+        if (extension.length() < 2) {
+            return false;
+        }
+        // Domain name before . must not be empty and valid chars
+        String domainName = domain.substring(0, dotIndex);
+        if (domainName.isEmpty()) {
+            return false;
+        }
+        for (char c : domainName.toCharArray()) {
+            if (!Character.isLetterOrDigit(c) && c != '-') {
+                return false;
+            }
+        }
+        return true;
     }
 }
