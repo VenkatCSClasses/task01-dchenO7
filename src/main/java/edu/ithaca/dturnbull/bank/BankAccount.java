@@ -51,6 +51,14 @@ public class BankAccount {
         if (amount < 0) {
             return false;
         }
+        String amountStr = Double.toString(amount);
+        if (amountStr.indexOf(".")!=-1) {
+            String splitter = amountStr.split("\\.")[1];
+            if (splitter.length() > 2) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static boolean isEmailValid(String email){

@@ -43,6 +43,7 @@ class BankAccountTest {
         assertThrows( IllegalArgumentException.class, () -> bankAccount.withdraw(-300));
     }
 
+    @Test
     void isAmountValidTest(){
         //valid amounts
         assertTrue(BankAccount.isAmountValid(10));
