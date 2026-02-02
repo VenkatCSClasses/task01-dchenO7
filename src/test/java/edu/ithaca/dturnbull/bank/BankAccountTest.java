@@ -19,9 +19,11 @@ class BankAccountTest {
         // normal case
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance(), 0.001);
+        bankAccount.withdraw(100);
+        assertEquals(0, bankAccount.getBalance(), 0.001);
         //zero
         bankAccount.withdraw(0);
-        assertEquals(100, bankAccount.getBalance(), 0.001);
+        assertEquals(0, bankAccount.getBalance(), 0.001);
 
         //edge cases, too much withdrawn, negative amount withdrawn, should throw exceptions
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
