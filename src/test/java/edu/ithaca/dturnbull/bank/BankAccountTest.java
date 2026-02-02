@@ -45,6 +45,14 @@ class BankAccountTest {
         assertTrue( BankAccount.isEmailValid("ab@ed.cc")); // another simple format
         assertTrue( BankAccount.isEmailValid("a12@gm.com")); // valid character (numbers)
         assertTrue( BankAccount.isEmailValid("am@mail-archive.com")); // valid character (dash post @)
+
+         // more test
+        assertTrue(BankAccount.isEmailValid("12345@gm.com")); // all numbers in local part
+        assertTrue(BankAccount.isEmailValid("a@b.cd")); // two letter domain extension, border case
+        assertTrue(BankAccount.isEmailValid("a.b.c@domain-name.com")); // multiple dots in local part, dash in domain name, border case
+        assertTrue(BankAccount.isEmailValid("1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr@gma.com")); // 64 char local part, border case
+
+        assertFalse(BankAccount.isEmailValid("1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrs@gma.com")); // 65 char local part, border case
     }
 
     @Test
