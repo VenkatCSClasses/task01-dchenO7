@@ -9,8 +9,21 @@ class BankAccountTest {
     @Test
     void getBalanceTest() {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
-
+        //normal case
         assertEquals(200, bankAccount.getBalance(), 0.001);
+
+        //zero balance
+        BankAccount bankAccount2 = new BankAccount("av@c.com", 0);
+        assertEquals(0, bankAccount2.getBalance(), 0.001);
+
+        //edge cases
+        BankAccount bankAccount3 = new BankAccount("ar@jg.com", 0.01); //small amount
+        assertEquals(0.01, bankAccount3.getBalance(), 0.001);
+        BankAccount bankAccount4 = new BankAccount("d@r.com", 1000000000); //large amount
+        assertEquals(1000000000, bankAccount4.getBalance(), 0.001);
+        BankAccount bankAccount5 = new BankAccount("fj@f.com", -50); //negative balance
+        assertEquals(-50, bankAccount5.getBalance(), 0.001);
+
     }
 
     @Test
