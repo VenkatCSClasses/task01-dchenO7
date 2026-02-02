@@ -23,7 +23,7 @@ class BankAccountTest {
         bankAccount.withdraw(0);
         assertEquals(100, bankAccount.getBalance(), 0.001);
 
-        //edge cases, too much withdrawn, negative amount withdrawn
+        //edge cases, too much withdrawn, negative amount withdrawn, should throw exceptions
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
         assertThrows( IllegalArgumentException.class, () -> bankAccount.withdraw(-300));
     }
