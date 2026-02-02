@@ -43,6 +43,22 @@ class BankAccountTest {
         assertThrows( IllegalArgumentException.class, () -> bankAccount.withdraw(-300));
     }
 
+    void isAmountValidTest(){
+        //valid amounts
+        assertTrue(BankAccount.isAmountValid(10));
+        assertTrue(BankAccount.isAmountValid(1.23));
+
+        //invalid amounts
+        assertFalse(BankAccount.isAmountValid(-5)); //negative amount
+        assertFalse(BankAccount.isAmountValid(1.234)); //more than 2 decimal places
+
+        //edge cases
+        assertTrue(BankAccount.isAmountValid(0)); //zero amount
+        assertTrue(BankAccount.isAmountValid(0.01)); //smallest valid amount
+        assertFalse(BankAccount.isAmountValid(-0.01)); //smallest invalid negative amount
+        }
+
+    
     @Test
     void isEmailValidTest(){
         // not valid emails

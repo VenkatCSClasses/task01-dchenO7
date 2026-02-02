@@ -43,6 +43,15 @@ public class BankAccount {
         }
     }
 
+    /**
+     * Checks if the amount is valid (non-negative and has two decimal places or less)
+     * @return true if valid, false otherwise
+     */
+    public static boolean isAmountValid(double amount){
+        if (amount < 0) {
+            return false;
+        }
+    }
 
     public static boolean isEmailValid(String email){
         if (email == null || email.isEmpty()) {
