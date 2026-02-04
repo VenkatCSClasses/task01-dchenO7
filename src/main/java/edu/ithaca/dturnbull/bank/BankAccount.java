@@ -61,6 +61,14 @@ public class BankAccount {
     }
 
     /**
+     * @post transfers the amount from this account to other account if amount is valid and this account has enough balance
+     * @throws IllegalArgumentException if the amount is invalid or this account has insufficient funds
+     */
+    public void transfer (double amount, BankAccount other){
+        
+    }
+
+    /**
      * Checks if the amount is valid (non-negative and has two decimal places or less)
      * @return true if valid, false otherwise
      */

@@ -64,9 +64,34 @@ class BankAccountTest {
         assertThrows( IllegalArgumentException.class, () -> bankAccount.deposit(-50));
         //throw exception when depositing amount with more than 2 decimal places
         assertThrows( IllegalArgumentException.class, () -> bankAccount.deposit(50.123));
-
     }
 
+    @Test
+    void transferTest(){
+        BankAccount bankAccount1 = new BankAccount("a@b.com", 200);
+        BankAccount bankAccount2 = new BankAccount("c@d.com", 100);
+        // normal case
+        bankAccount1.transfer(50, bankAccount2);
+        assertEquals(150, bankAccount1.getBalance(), 0.001);
+        assertEquals(150, bankAccount2.getBalance(), 0.001);
+        //edge case, transfer zero
+        bankAccount1.transfer(0, bankAccount2);
+        assertEquals(150, bankAccount1.getBalance(), 0.001);
+        assertEquals(150, bankAccount2.getBalance(), 0.001);
+        //edge case, transfer small amount
+        bankAccount1.transfer(0.01, bankAccount2);
+        assertEquals(149.99, bankAccount1.getBalance(), 0.001);
+        assertEquals(150.01, bankAccount2.getBalance(), 0.001);
+        //edge case, transfer entire balance
+        bankAccount1.transfer(149.99, bankAccount2);
+        assertEquals(0, bankAccount1.getBalance(), 0.001);
+        assertEquals(300, bankAccount2.getBalance(), 0.001);
+
+        //throw exception when transferring negative amount
+        assertThrows( IllegalArgumentException.class, () -> bankAccount1.transfer(-50, bankAccount2));
+        //throw exception when transferring amount with more than 2 decimal places
+        assertThrows( IllegalArgumentException.class, () -> bankAccount1.transfer(50.123, bankAccount2));
+    }
 
     @Test
     void isAmountValidTest(){
