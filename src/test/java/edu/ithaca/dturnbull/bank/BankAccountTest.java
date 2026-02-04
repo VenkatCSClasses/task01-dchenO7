@@ -41,6 +41,10 @@ class BankAccountTest {
         //edge cases, too much withdrawn, negative amount withdrawn, should throw exceptions
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
         assertThrows( IllegalArgumentException.class, () -> bankAccount.withdraw(-300));
+
+        //throw exception when withdrawing with decimal more than 2 places
+        assertThrows( IllegalArgumentException.class, () -> bankAccount.withdraw(50.123));
+
     }
 
     @Test
@@ -95,6 +99,8 @@ class BankAccountTest {
         assertEquals(200, bankAccount.getBalance(), 0.001);
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.co", -10));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", 50.123));
     }
 
 }
