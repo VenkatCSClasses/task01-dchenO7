@@ -63,9 +63,19 @@ public class BankAccount {
     /**
      * @post transfers the amount from this account to other account if amount is valid and this account has enough balance
      * @throws IllegalArgumentException if the amount is invalid or this account has insufficient funds
+     * @throws InsufficientFundsException if this account has insufficient funds
      */
     public void transfer (double amount, BankAccount other){
-        
+        if (isAmountValid(amount)==false) {
+            throw new IllegalArgumentException("amount not valid");
+        }
+        else if (this.balance < amount) {
+            throw new IllegalArgumentException("Insufficient funds");
+        }
+        else {
+            this.balance -= amount;
+            other.balance += amount;
+        }
     }
 
     /**
