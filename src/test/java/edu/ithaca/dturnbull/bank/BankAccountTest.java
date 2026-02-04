@@ -48,6 +48,27 @@ class BankAccountTest {
     }
 
     @Test
+    void depositTest(){
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        // normal case
+        bankAccount.deposit(100);
+        assertEquals(300, bankAccount.getBalance(), 0.001);
+        //edge case, deposit zero
+        bankAccount.deposit(0);
+        assertEquals(300, bankAccount.getBalance(), 0.001);
+        //edge case, deposit small amount
+        bankAccount.deposit(0.01);
+        assertEquals(300.01, bankAccount.getBalance(), 0.001);
+
+        //throw exception when depositing negative amount
+        assertThrows( IllegalArgumentException.class, () -> bankAccount.deposit(-50));
+        //throw exception when depositing amount with more than 2 decimal places
+        assertThrows( IllegalArgumentException.class, () -> bankAccount.deposit(50.123));
+
+    }
+
+
+    @Test
     void isAmountValidTest(){
         //valid amounts
         assertTrue(BankAccount.isAmountValid(10));

@@ -48,6 +48,14 @@ public class BankAccount {
     }
 
     /**
+     * @post adds the amount to the balance if amount is non-negative and has no more than 2 decimal places
+     * @throws IllegalArgumentException if the deposit amount is negative or has more than 2 decimal places
+     */
+    public void deposit (double amount){
+        
+    }
+
+    /**
      * Checks if the amount is valid (non-negative and has two decimal places or less)
      * @return true if valid, false otherwise
      */
